@@ -1,2 +1,2 @@
-#!/bin/bash
-alias -p hello="hello user"
+i#!/bin/bash
+alias -p hello="echo hello user"
