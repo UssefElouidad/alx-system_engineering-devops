@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # a Bash script that displays To infinity and beyond indefinitely.
+sigterm_hander() {
+	echo "I am inicible!!!"
+	exit 0
+}
+trap 'sigterm_hander' SIGTERM
+
+#echo "To infinity and beyond"
 while true; do
-echo "To infinity and beyond"
-sleep 2
+	echo "To infinity and beyond"
+	sleep 2
 done
-trap echo "I am invincible!!!" SIGTERM
