@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# a Bash script that displays the content of the current directory
-for entry in *; do
-	if [ -f "$entry" ] && [[ ! "$entry" =~ ^\. ]]; then
-	names=$(echo "$entry" | cut -d'-' -f2-)
-	echo "$names"
-	fi
-done
