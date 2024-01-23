@@ -23,6 +23,6 @@ server {
 EOL
 
 # Restart Nginx
-sudo service nginx reload || sudo service nginx restart
+sudo service nginx restart
 
 echo "Nginx installed and configured successfully."
