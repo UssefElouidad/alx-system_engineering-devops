@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# configure the Nginx to have a custom 404 page that contains the string Ceci n'est pas une page
+# Update the package index
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get install -y nginx
+
+# Create a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html > /dev/null
+
+# Configure Nginx for custom 404 page
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /usr/share/nginx/html;
+        internal;
+    }
+}
+EOL
+
+# Restart Nginx
+sudo service nginx restart
+
+echo "Nginx configured with custom 404 page successfully."
+

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# a script that installs nginx on my web serverweb-01
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOL
+
+# Restart Nginx
+sudo service nginx restart
+
+echo "Nginx installed and configured successfully."
